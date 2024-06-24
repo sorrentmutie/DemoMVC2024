@@ -1,0 +1,11 @@
+﻿@{
+    var a = 1;
+}
+
+@model IEnumerable<Student>
+
+<h1>Elenco studenti corso blazor</h1>
+
+@foreach(var studente in Model) {
+   <p>Nome: @studente.Name, @studente.Email</p>
+}

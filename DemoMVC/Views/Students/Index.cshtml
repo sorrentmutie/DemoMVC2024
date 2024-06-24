@@ -1,0 +1,74 @@
+﻿@using DemoMVC.ViewModels
+@model StudentsIndexViewModel 
+
+
+@* @model IEnumerable<DemoMVC.Models.Student> *@
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>@Model.Title</h1>
+<h3>Numero totale di studenti: @Model.TotalNumberOfStudents</h3>
+<h3>Numero totale di professori: @Model.Professors?.Count()</h3>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if(Model.Students is not null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Email
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Students)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+
+                        @foreach(var professor in Model.Professors)
+                        {
+                            
+                                <span class="badge bg-primary">@professor.Name</span>
+                           
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modifica", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Non ci sono studenti</p>
+}
+
+
+
+
